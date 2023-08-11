@@ -207,6 +207,8 @@ In conclusion, this exercise provided us with valuable insights into the challen
 
 ## References
 [1] Patrick Bilic et al. “The Liver Tumor Segmentation Benchmark (LiTS)”. In: Medical Image Analysis 84 (Feb. 2023), p. 102680. doi: 10.1016/j.media.2022.102680. url: https://doi.org/10.1016/j. media.2022.102680.
+
 [2] Joseph Redmon et al. You Only Look Once: Unified, Real-Time Object Detection. 2015. doi: 10.48550/ ARXIV.1506.02640. url: https://arxiv.org/abs/1506.02640.
+
 [3] Nicolas Carion et al. “End-to-End Object Detection with Transformers”. In: (2020). doi: 10.48550/ ARXIV.2005.12872. url: https://arxiv.org/abs/2005.12872.
 
