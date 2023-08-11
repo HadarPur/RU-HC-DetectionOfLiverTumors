@@ -6,17 +6,22 @@ Submitted as a project report for the AI for Healthcare course, IDC, 2023
 
 ## Overview
 In this exercise, we focused on the detection of liver tumors using contrast-enhanced CT images. The dataset comprised of 201 images from patients suffering from primary cancers and metastatic liver disease, often a consequence of colorectal, breast, and lung primary cancers. The data, obtained from the IRCAD Hˆopitaux Universitaires, Strasbourg, France, is a subset of patients from the 2017 Liver Tumor Segmentation (LiTS) challenge [1]. The dataset is accessible at the Medical Decathlon website1.
+
 The primary challenge was the significant label imbalance between large (liver) and small (tumor) target Regions of Interest (ROIs). To mitigate this, we implemented a balanced sampling strategy, selecting an equal number of images from each class. Our approach involved a comprehensive exploration of the data, rigorous pre-processing, and the application of the YOLO architecture for object detection. We also exper- imented with various data augmentation techniques and hyperparameter settings to optimize our model’s performance.
 
 ## Data Exploration
 The data exploration phase was a critical step in our project, as it allowed us to understand the distribution of the data, visualize the images, and evaluate the initial results. One of the key challenges we faced was the significant imbalance in the data. The dataset was skewed, with the majority of the volumes not containing any of the classes - neither liver nor tumor. This imbalance was even more pronounced when it came to the slices containing tumors, which were few and far between.
+
 This imbalance posed a significant challenge for the network’s ability to detect tumors. The scarcity of tumor- containing slices in the dataset could lead the network to develop a bias towards predicting the absence of tumors, thereby reducing its sensitivity to cases where tumors are present.
+
 To address this issue, we implemented a balanced sampling strategy. We selected an equal number of images from each class, resulting in a total of 21,570 images - 7,190 images with tumors, 7,190 images with livers,and 7,190 images with none of them. This approach helped to ensure a more balanced representation of the classes in our training data, thereby improving the network’s ability to detect tumors.
 
 ## Data Labeling and Conversion
 Our dataset initially consisted of 3D CT images and segmentations. However, our assignment required us to perform object detection on this data, which necessitated the creation of labels in the form of bounding boxes for the liver and tumors.
+
 To create these labels, we computed the bounding boxes around the liver and tumors in each 3D image. This process involved identifying the minimum and maximum x and y coordinates that encapsulate the liver and tumors, which defined the boundaries of our bounding boxes.
 In addition to creating labels, we also needed to convert our 3D images into 2D slices. This conversion was necessary because the YOLO architecture, which we used for our model, operates on 2D images.
+
 Finally, we had to convert the format of our images and labels into a format that the YOLO architecture could accept. This process involved saving the 2D slices as individual image files and creating a corresponding text file for each image, containing the labels for that image in the format required by YOLO.
 
 ## Data Preprocessing
@@ -53,24 +58,32 @@ We utilized the YOLO (You Only Look Once) architecture for our model [2] after e
 
 ### DETR
 The DETR (Detection Transformer) architecture is a state-of-the-art object detection framework that com- bines Transformers and convolutional neural networks (CNNs) for accurate object detection in medical images.
+
 In general, DETR uses a CNN backbone to extract features from the input image. These features are then passed through a Transformer encoder, which captures both local and global contextual information. Object queries, representing the objects to be detected, attend over the encoder output to predict object presence, class, and location.
 
 ### YOLO
 YOLO (You Only Look Once) is an efficient object detection algorithm renowned for its real-time capabilities. It takes a unique approach by treating object detection as a single regression problem. The input image is divided into a grid, and YOLO predicts bounding boxes and class probabilities for objects within each grid cell. This grid-based methodology enables YOLO to process the entire image simultaneously, resulting in impressive speed.
+
 YOLO utilizes a convolutional neural network (CNN) backbone, such as Darknet or ResNet, to extract informative features from the input image. These features are then used to predict bounding box coordinates, object class probabilities, and confidence scores. To handle variations in object sizes and shapes, YOLO incorporates anchor boxes.
+
 One of YOLO’s notable strengths is its ability to detect multiple objects within a single grid cell, effectively reducing redundancy and overlapping detections. This efficient design makes it well-suited for scenarios involving small objects and intricate details, such as autonomous driving and surveillance applications.
 
 
 ### From DETR to YOLO
 Our primary objective was to utilize the DETR model for liver tumor detection. However, despite our efforts, we encountered challenges in accomplishing this mission effectively. Several factors may have contributed to the suboptimal performance of DETR in this context.
+
 Limited success of the DETR model in liver tumor detection could be attributed to several factors. Firstly, the scarcity or imbalance of liver tumor samples in the training dataset may have hindered the model’s ability to learn and generalize effectively. Insufficient instances, small tumors detected or an unbalanced distribution of tumor variations could have impeded accurate detection in unseen cases.
+
 Secondly, the complex nature of medical imaging data, including variations in image quality, tumor appear- ance, and the presence of artifacts, might have posed challenges for DETR’s architecture. The model may have lacked the necessary capacity to capture the diverse range of tumor characteristics adequately.
+
 Moreover, the preprocessing steps and data augmentation applied, such as converting images from 2D to 3D and transforming data into the COCO format, might have introduced challenges or inconsistencies affecting the model’s performance in detecting liver tumors accurately.
+
 After initially adopting the DETR architecture for liver tumor detection, we encountered unsatisfactory results and observed that the model struggled to learn effectively. As a result, we made the decision to transition to the YOLOv7 architecture, which is the best YOLO version in terms of accuracy (MAP), which yielded superior performance. The single-stage detection approach employed by YOLO, along with its capability to handle small objects and intricate details, proved to be advantageous for the complexity of our medical imaging data.
 
 
 ## Hyperparameter Tuning
 We experimented with different learning rates: 0.1, 0.01, and 0.001. The learning rate is a crucial hyper- parameter that determines how much the model changes in response to the estimated error each time the model weights are updated. Choosing the right learning rate is essential for training an effective model.
+
 After conducting experiments, we found that a learning rate of 0.01 yielded the best results. This learning rate was neither too large, which could lead to erratic behavior, nor too small, which could result in the model learning too slowly. It provided a good balance, allowing the model to learn at a steady pace while also enabling it to adjust its weights and biases effectively to minimize the loss.
 
 <p align="center"">
@@ -78,7 +91,9 @@ After conducting experiments, we found that a learning rate of 0.01 yielded the 
 </p>
 
 In addition to the learning rate, we also set the batch size to 32. The batch size determines the number of training examples used in one iteration. A batch size of 32 was chosen as it is a common choice in practice, offering a good balance between computational efficiency and model performance. It is large enough to benefit from the speedup of matrix operations in the deep learning libraries, yet small enough to not require excessive memory resources.
+
 We also used the Adam optimizer for our model. Adam, short for Adaptive Moment Estimation, is an optimization algorithm that can handle sparse gradients on noisy problems. It’s known for its efficiency and the relatively low memory requirements. Adam combines the best properties of the AdaGrad and RMSProp algorithms to provide an optimization algorithm that can handle a wide range of data and tasks.
+
 Lastly, we used weight decay, which is a regularization technique that prevents the weights from growing too large by adding a penalty term to the loss function. This helps to prevent over-fitting by adding a cost to the loss function for large weights.
 
 ## Training
@@ -86,6 +101,7 @@ Our model was trained using either half or the entire dataset for a range of 15 
 
 ### DETR
 In order to leverage the preprocessed data in COCO format, which was initially prepared for the DETR architecture, we aimed to adapt it for YOLO. To achieve this, we developed a converter that transformed the COCO format to YOLO’s accepted format which includes a text file for each slice with its labels and bounding boxes indices and a yaml file. By creating this converter, we were able to seamlessly transition the preprocessed data from COCO to YOLO, taking advantage of the hard work we did before.
+
 We present the following performance metrics obtained on the validation and training sets of the dataset. It is observed that the training loss exhibits a decaying trend, reaching a value of 0.741 after 10 epochs on a subset of 500 images of each type; liver, tumor, and background classes. However, the validation loss does not demonstrate stability. Notably, when conducting the experiment on a larger dataset consisting of 7000 images per type, similar results were achieved on the validation set.
 
 <p align="center"">
@@ -130,8 +146,10 @@ The left image shows the predictions made by the model, and the right image show
 </p>
 
 The confusion matrix provides a more detailed view of the model’s performance. It shows the number of true positive, true negative, false positive, and false negative predictions.
+
 In this experiment, the model performed well on the training data, but there was room for improvement on the test data. This suggests that the model might be over-fitting to the training data, and adjustments to the model’s complexity or the amount of training data might be necessary.
 The model’s performance improved over time, with the precision, recall, and F1 score all increasing over the epochs. However, the model’s performance on the validation data did not improve as much, suggesting that the model might be over-fitting to the training data.
+
 The results of this experiment suggest that the model’s architecture and training parameters were generally effective, but there may be room for improvement. The learning rate of 0.01 and batch size of 32 were suitable for this experiment. They enabled the model to learn steadily without excessive loss fluctuations and ensured effective weight updates during training without instability. Future experiments could explore using different model architectures, training parameters, or data augmentation techniques to further improve the model’s performance.
 
 #### Experiment 2, 2.1 and 2.2
@@ -161,12 +179,16 @@ In Experiment 3, we used half of the data (65 images), applied data augmentation
 
 #### Experiment 4
 In Experiment 4, we focused on the impact of intensity normalization on our model’s performance. We used half of the dataset (65 images), a learning rate of 0.01, a batch size of 32, and trained the model for 15 epochs.
+
 We tested various normalization techniques, including Z-score, Min-Max, and Percentile normalization. Our focus was on the percentile intensity normalization, as it provided the best contrast, making the tumor and liver more distinguishable.
+
 The results showed a consistent decrease in loss across epochs, and the precision, recall, and F1 score showed an upward trend. However, it’s important to note that while the percentile intensity normalization enhanced the visibility of the tumor and liver in the images, it’s not clear-cut whether this preprocessing step led to an improvement in the model’s performance.
 
 #### Experiment 5
 In Experiment 5, we combined the techniques from the previous experiments to see how they would work together. We used half of the dataset (65 images), a learning rate of 0.01, a batch size of 32, and trained the model for 15 epochs.
+
 In this experiment, we applied both data augmentation and intensity normalization to the images. The data augmentation techniques included rotation, flipping, and translation, which were intended to increase the diversity of the training data and help the model generalize better. The intensity normalization, specifically percentile intensity normalization, was used to enhance the contrast in the images, making the tumor and liver more distinguishable.
+
 The combination of these techniques aimed to provide the model with a more varied and representative training set, while also enhancing the quality of the images for better feature extraction. The results of this experiment would provide insights into how these preprocessing steps work in tandem and their combined effect on the model’s performance.
 
 ### Comparison of Experiments
@@ -182,11 +204,17 @@ We conducted several experiments to evaluate the performance of our model on dif
 
 Precision (P) and Recall (R) are evaluation metrics commonly used in object detection tasks.
 Precision (P) measures the proportion of correctly predicted positive instances (true positives) out of all instances predicted as positive (true positives + false positives). In other words, it quantifies the accuracy of the model’s positive predictions.
+
 Recall (R) measures the proportion of correctly predicted positive instances (true positives) out of all actual positive instances (true positives + false negatives). It quantifies the ability of the model to capture all positive instances in the dataset.
+
 mAP@.5 evaluates the mean average precision at an IoU threshold of 0.5. It calculates the average precision for each class and then takes the mean across all classes. Intersection over Union (IoU) is a metric used to evaluate the overlap between two bounding boxes. It measures the ratio of the intersection area between the predicted and ground truth bounding boxes to the union area of both boxes. Average precision is a measure of the model’s accuracy in predicting both the bounding box location and the class label of an object.
+
 mAP@.5:.95 is similar to mAP@.5, but it considers a range of IoU thresholds from 0.5 to 0.95. It provides a more comprehensive evaluation by considering different levels of overlap between predicted and ground truth bounding boxes.
+
 When each of these metrics (P, R, mAP@.5, mAP@.5:.95) is high, it indicates a high-performance object detection model. A high precision means that the model has a low false positive rate, making accurate positive predictions. A high recall indicates that the model captures a large portion of the true positive instances, minimizing false negatives.
+
 High mAP@.5 and mAP@.5:.95 values imply that the model consistently achieves accurate detections across different IoU thresholds. This demonstrates the model’s ability to precisely locate objects and assign correct class labels.
+
 Overall, when precision, recall, mAP@.5, and mAP@.5:.95 are high, it signifies that the model has a good balance of accuracy and completeness in object detection, making it highly effective in identifying and localizing objects in the given dataset.
 
 ## Results Discussion
@@ -198,8 +226,12 @@ In this section, we discuss the results obtained from the various experiments co
 
 ## Results conclusions
 In conclusion, these experiments highlight the importance of data preprocessing techniques such as aug- mentation and normalization in improving model performance. However, they also underscore the need for careful tuning of these techniques, as they can have varying effects on different classes.
-When it comes to achieving final results, 15 epochs and training on only half of the data may not always be sufficient. However, our observations revealed that the impact of the number of epochs was less significant compared to the influence of the training data size. Moreover, this approach can still provide insights into the relative performance of different model parameters and techniques. By comparing the results obtained under these conditions, we can make informed decisions about which approaches are more promising and worth further exploration.
+
+When it comes to achieving final results, 15 epochs and training on only half of the data may not always be sufficient. However, our observations revealed that the impact of the number of epochs was less significant compared to the influence of the training data size. 
+
+Moreover, this approach can still provide insights into the relative performance of different model parameters and techniques. By comparing the results obtained under these conditions, we can make informed decisions about which approaches are more promising and worth further exploration.
 It’s important to consider the limitations of our computational resources, particularly the low compute power. Training the model for 30 epochs on the entire dataset, which consists of 21,000 slices (including liver, tumor, background) can be a time-consuming process, taking approximately 5 hours to complete. Given these constraints, conducting a comprehensive evaluation on the full dataset might not be feasible within the available time and resources. Therefore, the initial experimentation with 15 epochs and a reduced dataset size serves as a practical compromise to gain preliminary insights and guide our decision making process.
+
 For further experiments, it’s beneficial to conduct more extensive studies using augmented data. For instance, augmenting each data point with two additional images and applying normalization to the entire dataset would effectively triple the amount of data and especially could help detecting small tumors. However, implementing such an approach would require additional computational resources and necessitate more workers and stronger computing power to handle the augmented dataset effectively.
 
 ## Conclusion
