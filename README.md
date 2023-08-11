@@ -5,7 +5,7 @@ Shir Nitzan, Timor Baruch, Hadar Pur
 Submitted as a project report for the AI for Healthcare course, IDC, 2023
 
 ## Overview
-In this exercise, we focused on the detection of liver tumors using contrast-enhanced CT images. The dataset comprised of 201 images from patients suffering from primary cancers and metastatic liver disease, often a consequence of colorectal, breast, and lung primary cancers. The data, obtained from the IRCAD Hˆopitaux Universitaires, Strasbourg, France, is a subset of patients from the 2017 Liver Tumor Segmentation (LiTS) challenge [1]. The dataset is accessible at the Medical Decathlon website1.
+We focused on the detection of liver tumors using contrast-enhanced CT images. The dataset comprised of 201 images from patients suffering from primary cancers and metastatic liver disease, often a consequence of colorectal, breast, and lung primary cancers. The data, obtained from the IRCAD Hˆopitaux Universitaires, Strasbourg, France, is a subset of patients from the 2017 Liver Tumor Segmentation (LiTS) challenge [1]. The dataset is accessible at the Medical Decathlon website1.
 
 The primary challenge was the significant label imbalance between large (liver) and small (tumor) target Regions of Interest (ROIs). To mitigate this, we implemented a balanced sampling strategy, selecting an equal number of images from each class. Our approach involved a comprehensive exploration of the data, rigorous pre-processing, and the application of the YOLO architecture for object detection. We also exper- imented with various data augmentation techniques and hyperparameter settings to optimize our model’s performance.
 
