@@ -29,7 +29,7 @@ After experimenting with these normalization methods, we found that Percentile N
 To illustrate the effect of the Percentile Normalization, we present below the images before and after the normalization process.
 
 <p align="right">
-  <img src="" alt="drawing" width="800"/>
+  <img src="https://github.com/HadarPur/RU-HC-DetectionOfLiverTumors/blob/main/figurs/fig1.png" alt="drawing" width="800"/>
 </p>
 
 
@@ -43,7 +43,7 @@ These augmentation techniques were beneficial in creating a more diverse dataset
 To illustrate the effect of the data augmentation, we present below the images before and after the augmen- tation process.
 
 <p align="right">
-  <img src="" alt="drawing" width="800"/>
+  <img src="https://github.com/HadarPur/RU-HC-DetectionOfLiverTumors/blob/main/figurs/fig2.png" alt="drawing" width="800"/>
 </p>
 
 ## Model Architecture
@@ -72,7 +72,7 @@ We experimented with different learning rates: 0.1, 0.01, and 0.001. The learnin
 After conducting experiments, we found that a learning rate of 0.01 yielded the best results. This learning rate was neither too large, which could lead to erratic behavior, nor too small, which could result in the model learning too slowly. It provided a good balance, allowing the model to learn at a steady pace while also enabling it to adjust its weights and biases effectively to minimize the loss.
 
 <p align="right">
-  <img src="" alt="drawing" width="800"/>
+  <img src="https://github.com/HadarPur/RU-HC-DetectionOfLiverTumors/blob/main/figurs/fig3.png" alt="drawing" width="800"/>
 </p>
 
 In addition to the learning rate, we also set the batch size to 32. The batch size determines the number of training examples used in one iteration. A batch size of 32 was chosen as it is a common choice in practice, offering a good balance between computational efficiency and model performance. It is large enough to benefit from the speedup of matrix operations in the deep learning libraries, yet small enough to not require excessive memory resources.
@@ -87,7 +87,7 @@ In order to leverage the preprocessed data in COCO format, which was initially p
 We present the following performance metrics obtained on the validation and training sets of the dataset. It is observed that the training loss exhibits a decaying trend, reaching a value of 0.741 after 10 epochs on a subset of 500 images of each type; liver, tumor, and background classes. However, the validation loss does not demonstrate stability. Notably, when conducting the experiment on a larger dataset consisting of 7000 images per type, similar results were achieved on the validation set.
 
 <p align="right">
-  <img src="" alt="drawing" width="800"/>
+  <img src="https://github.com/HadarPur/RU-HC-DetectionOfLiverTumors/blob/main/figurs/fig4.png" alt="drawing" width="800"/>
 </p>
 
 ### YOLO
@@ -98,30 +98,34 @@ In both experiments, we utilized the entire dataset comprising 131 images for ea
 In this experiment, we used all the data (131 images), a learning rate of 0.01, a batch size of 32, and trained the model for 30 epochs. Our observations indicate that the results obtained from this experiment were similar to those of experiment 1.1, which involved a reduced number of epochs also on all the dataset. This suggests that the number of epochs does not significantly affect the model’s accuracy. Rather, it implies that increasing the amount of available data would be more advantageous in enhancing the model’s performance, rather than solely relying on increasing the number of epochs.
 
 <p align="right">
-  <img src="" alt="drawing" width="800"/>
+  <img src="https://github.com/HadarPur/RU-HC-DetectionOfLiverTumors/blob/main/figurs/fig5.png" alt="drawing" width="800"/>
 </p>
 
 ##### Experiment 1.1
 In this experiment, we used all the data (131 images), a learning rate of 0.01, a batch size of 32, and trained the model for 15 epochs.
 
 <p align="right">
-  <img src="" alt="drawing" width="800"/>
+  <img src="https://github.com/HadarPur/RU-HC-DetectionOfLiverTumors/blob/main/figurs/fig6.png" alt="drawing" width="800"/>
 </p>
 
 The training progress image shows how the model improved over time. As the number of epochs increased, the model’s performance on the training data improved.
 
 <p align="right">
-  <img src="" alt="drawing" width="800"/>
+  <img src="https://github.com/HadarPur/RU-HC-DetectionOfLiverTumors/blob/main/figurs/fig7.png" alt="drawing" width="800"/>
 </p>
 
 The Precision-Recall curve shows the trade-off between precision and recall for different threshold. A high area under the curve represents both high recall and high precision.
 
 <p align="right">
-  <img src="" alt="drawing" width="800"/>
+  <img src="https://github.com/HadarPur/RU-HC-DetectionOfLiverTumors/blob/main/figurs/fig8.png" alt="drawing" width="800"/>
 </p>
 
 
 The left image shows the predictions made by the model, and the right image shows the ground truth. The bounding boxes in the images represent the locations of the objects detected by the model.
+
+<p align="right">
+  <img src="https://github.com/HadarPur/RU-HC-DetectionOfLiverTumors/blob/main/figurs/fig9.png" alt="drawing" width="800"/>
+</p>
 
 The confusion matrix provides a more detailed view of the model’s performance. It shows the number of true positive, true negative, false positive, and false negative predictions.
 In this experiment, the model performed well on the training data, but there was room for improvement on the test data. This suggests that the model might be over-fitting to the training data, and adjustments to the model’s complexity or the amount of training data might be necessary.
@@ -141,11 +145,11 @@ Experiment 2.1 was similar to Experiment 2, but with a lower learning rate of 0.
 In Experiment 2.2, we increased the learning rate to 0.1. This higher learning rate resulted in a faster learning process. However, the model’s performance on the validation data did not improve as much as in the previous experiments, suggesting that the higher learning rate may have caused the model to converge to a less optimal solution.
 
 <p align="right">
-  <img src="" alt="drawing" width="800"/>
+  <img src="https://github.com/HadarPur/RU-HC-DetectionOfLiverTumors/blob/main/figurs/fig10.png" alt="drawing" width="800"/>
 </p>
 
 <p align="right">
-  <img src="" alt="drawing" width="800"/>
+  <img src="https://github.com/HadarPur/RU-HC-DetectionOfLiverTumors/blob/main/figurs/fig11.png" alt="drawing" width="800"/>
 </p>
 
 In summary, these experiments suggest that a learning rate of 0.01 provides the best balance between learning speed and model performance for our specific dataset and model architecture. While both lower and higher learning rates were able to facilitate learning, they did not yield better performance. Future experiments could explore using different learning rates to further optimize the model’s performance.
@@ -167,11 +171,11 @@ The combination of these techniques aimed to provide the model with a more varie
 We conducted several experiments to evaluate the performance of our model on different classes: all, liver, and tumor. The key metrics we focused on were Precision (P), Recall (R), and Mean Average Precision at different thresholds (mAP@.5, mAP@.5:.95). The results are presented separately for the training and testing phases.
 
 <p align="right">
-  <img src="" alt="drawing" width="800"/>
+  <img src="https://github.com/HadarPur/RU-HC-DetectionOfLiverTumors/blob/main/figurs/table1.png" alt="drawing" width="800"/>
 </p>
 
 <p align="right">
-  <img src="" alt="drawing" width="800"/>
+  <img src="https://github.com/HadarPur/RU-HC-DetectionOfLiverTumors/blob/main/figurs/table2.png" alt="drawing" width="800"/>
 </p>
 
 Precision (P) and Recall (R) are evaluation metrics commonly used in object detection tasks.
