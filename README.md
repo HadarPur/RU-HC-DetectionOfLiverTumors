@@ -177,7 +177,7 @@ We conducted several experiments to evaluate the performance of our model on dif
 </p>
 
 <p align="center"">
-  <img src="https://github.com/HadarPur/RU-HC-DetectionOfLiverTumors/blob/main/figurs/table2.png" alt="drawing" width="810"/>
+  <img src="https://github.com/HadarPur/RU-HC-DetectionOfLiverTumors/blob/main/figurs/table2.png" alt="drawing" width="800"/>
 </p>
 
 Precision (P) and Recall (R) are evaluation metrics commonly used in object detection tasks.
