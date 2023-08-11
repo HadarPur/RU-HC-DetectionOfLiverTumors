@@ -25,6 +25,7 @@ We employed three types of normalizations in our data preprocessing stage: Z-sco
 * Z-score Normalization: This method standardizes the features by subtracting the mean and dividing by the standard deviation. It is particularly useful when the data follows a Gaussian distribution.
 * Min-Max Normalization: This method rescales the features to a fixed range, usually 0 to 1. It is beneficial when the dataset contains mixed types of attributes (i.e., binary, categorical, and continuous).
 * Percentile Normalization: This method scales the data according to a specified percentile range. We used the 1st and 99th percentiles, which significantly enhanced the contrast and created a good distribution of the data. This was particularly beneficial for our dataset as it improved the visibility of the tumors.
+
 After experimenting with these normalization methods, we found that Percentile Normalization was the most effective for our dataset. It provided the best contrast and distribution, which in turn improved the model’s ability to detect tumors in the CT images.
 To illustrate the effect of the Percentile Normalization, we present below the images before and after the normalization process.
 
@@ -40,6 +41,7 @@ We implemented several data augmentation techniques to enhance the diversity of 
 * Translate: This method shifts the image along the x or y direction. It helps the model to recognize the object regardless of its position in the image.
 * Scaling: This method resizes the image. It helps the model to recognize the object regardless of its size in the image.
 These augmentation techniques were beneficial in creating a more diverse dataset, which in turn improved the model’s ability to generalize to unseen data.
+
 To illustrate the effect of the data augmentation, we present below the images before and after the augmen- tation process.
 
 <p align="center">
@@ -175,7 +177,7 @@ We conducted several experiments to evaluate the performance of our model on dif
 </p>
 
 <p align="center"">
-  <img src="https://github.com/HadarPur/RU-HC-DetectionOfLiverTumors/blob/main/figurs/table2.png" alt="drawing" width="800"/>
+  <img src="https://github.com/HadarPur/RU-HC-DetectionOfLiverTumors/blob/main/figurs/table2.png" alt="drawing" width="810"/>
 </p>
 
 Precision (P) and Recall (R) are evaluation metrics commonly used in object detection tasks.
