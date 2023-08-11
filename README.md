@@ -111,7 +111,7 @@ In this experiment, we used all the data (131 images), a learning rate of 0.01, 
 The training progress image shows how the model improved over time. As the number of epochs increased, the model’s performance on the training data improved.
 
 <p align="right">
-  <img src="https://github.com/HadarPur/RU-HC-DetectionOfLiverTumors/blob/main/figurs/fig7.png" alt="drawing" width="800"/>
+  <img src="https://github.com/HadarPur/RU-HC-DetectionOfLiverTumors/blob/main/figurs/fig7.png" alt="drawing" width="400"/>
 </p>
 
 The Precision-Recall curve shows the trade-off between precision and recall for different threshold. A high area under the curve represents both high recall and high precision.
@@ -124,7 +124,7 @@ The Precision-Recall curve shows the trade-off between precision and recall for 
 The left image shows the predictions made by the model, and the right image shows the ground truth. The bounding boxes in the images represent the locations of the objects detected by the model.
 
 <p align="right">
-  <img src="https://github.com/HadarPur/RU-HC-DetectionOfLiverTumors/blob/main/figurs/fig9.png" alt="drawing" width="800"/>
+  <img src="https://github.com/HadarPur/RU-HC-DetectionOfLiverTumors/blob/main/figurs/fig9.png" alt="drawing" width="500"/>
 </p>
 
 The confusion matrix provides a more detailed view of the model’s performance. It shows the number of true positive, true negative, false positive, and false negative predictions.
@@ -145,7 +145,7 @@ Experiment 2.1 was similar to Experiment 2, but with a lower learning rate of 0.
 In Experiment 2.2, we increased the learning rate to 0.1. This higher learning rate resulted in a faster learning process. However, the model’s performance on the validation data did not improve as much as in the previous experiments, suggesting that the higher learning rate may have caused the model to converge to a less optimal solution.
 
 <p align="right">
-  <img src="https://github.com/HadarPur/RU-HC-DetectionOfLiverTumors/blob/main/figurs/fig10.png" alt="drawing" width="800"/>
+  <img src="https://github.com/HadarPur/RU-HC-DetectionOfLiverTumors/blob/main/figurs/fig10.png" alt="drawing" width="400"/>
 </p>
 
 <p align="right">
